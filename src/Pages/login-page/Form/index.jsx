@@ -28,11 +28,17 @@ export default class Loginform extends Component {
     }
 
     try {
-      const lginUser = await axios.post(
+      const loginUser = await axios.post(
         "https://react-tt-api.onrender.com/api/users/login",
         { email: this.state.email, password: this.state.password }
       );
       this.setState({ validUser: true });
+      const data = JSON.stringify(loginUser.data);
+      // console.log(data);
+      localStorage.setItem("user", data);
+      const user = localStorage.getItem("user");
+      const userdata = JSON.parse(user);
+      console.log(userdata);
     } catch (e) {
       console.log(e);
     }

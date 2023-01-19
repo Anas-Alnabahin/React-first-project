@@ -64,6 +64,8 @@ export default class RegForm extends Component {
             password: this.state.password,
           }
         );
+        const data = JSON.stringify(signupuser.data);
+        localStorage.setItem("user", data);
       } catch (e) {
         console.log(e);
       } finally {
