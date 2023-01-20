@@ -4,14 +4,19 @@ import "./style.css";
 import profilePic from "../../assets/jenny.png";
 import Slider from "../Slider";
 import Footer from "../Footer";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default class Main extends Component {
+  rawData = localStorage.getItem("user");
+  data = JSON.parse(this.rawData);
+  isAdmin = this.data.isAdmin;
+
   logOuthandle = () => {
     localStorage.clear();
   };
 
   render() {
+    console.log(this.isAdmin);
     return (
       <div className="main-div">
         <Link to={"profile"}>
@@ -27,10 +32,25 @@ export default class Main extends Component {
           >
             Profile
           </button>
-
-          <Link to={"../Login"}>
+        </Link>
+        <Link to={"../Login"}>
+          <button
+            onClick={this.logOuthandle}
+            style={{
+              marginLeft: "50px",
+              padding: "10px",
+              marginTop: "30px",
+              width: "200px",
+              height: "50px",
+              fontSize: "30px",
+            }}
+          >
+            logout
+          </button>
+        </Link>
+        {this.isAdmin ? (
+          <Link to={"users"}>
             <button
-              onClick={this.logOuthandle}
               style={{
                 marginLeft: "50px",
                 padding: "10px",
@@ -40,10 +60,12 @@ export default class Main extends Component {
                 fontSize: "30px",
               }}
             >
-              logout
+              Show Users
             </button>
           </Link>
-        </Link>
+        ) : (
+          ""
+        )}
         <div className="welcome-div">
           <p>Welcome back, Jenny!</p>
           <img src={profilePic} alt="" />

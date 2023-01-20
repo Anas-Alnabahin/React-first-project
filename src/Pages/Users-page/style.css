@@ -1,0 +1,9 @@
+.users-div {
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+}
+
+.users-ul {
+  margin-top: 20px;
+}
